@@ -2,7 +2,7 @@ FROM solomonfield/hbase:1.2.6-ubuntu
 LABEL Solomonfield <whg19961229@gmail.com>
 
 ENV HIVE_VERSION=2.3.3
-# ADD ZOOKEEPER,HBASE AND HIVE
+# ADD HIVE
 RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz && \
     tar -xzvf apache-hive-${HIVE_VERSION}-bin.tar.gz && \
     mv apache-hive-${HIVE_VERSION}-bin /usr/local/hive && \
@@ -16,6 +16,9 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-${HIVE_VERSION}/a
 COPY config/* /tmp/
 RUN rm /usr/local/zookeeper/conf/zoo.cfg /usr/local/hbase/conf/hbase-site.xml && \
 	mv /tmp/zoo.cfg /usr/local/zookeeper/conf/zoo.cfg && \
+	# ADD LIBS
+	rm ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
+	mv /tmp/hadoop-env.sh ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
 	mv /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml && \
 	rm /usr/local/hbase/conf/regionservers && \
 	echo "hive-master" >> /usr/local/hbase/conf/regionservers && \

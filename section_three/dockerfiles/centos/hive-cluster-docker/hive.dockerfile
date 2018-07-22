@@ -13,6 +13,9 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-${HIVE_VERSION}/a
 	mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar /usr/local/hive/lib/ && \
 	rm mysql-connector-java-5.1.46.tar.gz && \
 	rm -rf mysql-connector-java-5.1.46 && \
+	# ADD LIBS
+	rm ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
+	mv /tmp/hadoop-env.sh ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
 	mv /tmp/hive-site.xml /usr/local/hive/conf/hive-site.xml && \
 	rm /usr/local/zookeeper/conf/zoo.cfg /usr/local/hbase/conf/hbase-site.xml && \
 	mv /tmp/zoo.cfg /usr/local/zookeeper/conf/zoo.cfg && \

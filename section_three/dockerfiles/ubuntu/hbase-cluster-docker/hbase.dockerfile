@@ -15,8 +15,6 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.10/
     rm hbase-${HBASE_VERSION}-bin.tar.gz && \
 	mkdir /usr/local/hbase/zookeeper && \
 	mkdir /var/hbase && \
-	echo "export HBASE_HOME=/usr/local/hbase" >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
-	echo 'export HADOOP_CLASSPATH=/usr/local/hadoop/lib/*:/usr/local/hbase/lib/*' >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
 	echo "hbase-master" >> /usr/local/hbase/conf/regionservers && \
 	echo "hbase-slave1" >> /usr/local/hbase/conf/regionservers && \
 	echo "hbase-slave2" >> /usr/local/hbase/conf/regionservers && \
@@ -30,6 +28,9 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.10/
 COPY config/* /tmp/
 RUN mv /tmp/zoo.cfg /usr/local/zookeeper/conf/zoo.cfg && \
 	mv /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml && \
+	# add hbase libs
+	rm ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
+	mv /tmp/hadoop-env.sh ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
 	rm $HADOOP_HOME/etc/hadoop/core-site.xml && \
     mv /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
 	rm $HADOOP_HOME/etc/hadoop/yarn-site.xml && \

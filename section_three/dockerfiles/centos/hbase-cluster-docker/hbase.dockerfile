@@ -25,9 +25,9 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.10/
 	echo "export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib" >> /usr/local/hbase/conf/hbase-env.sh && \
 	echo "export HADOOP_HOME=/usr/local/hadoop" >> /usr/local/hbase/conf/hbase-env.sh && \
 	echo "export HBASE_HOME=/usr/local/hbase" >> /usr/local/hbase/conf/hbase-env.sh && \
-	echo "export HBASE_HOME=/usr/local/hbase" >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
 	# add hbase libs
-	echo 'export HADOOP_CLASSPATH=/usr/local/hadoop/lib/*:/usr/local/hbase/lib/*' >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
+	rm ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
+	mv /tmp/hadoop-env.sh ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh && \
 	mv /tmp/zoo.cfg /usr/local/zookeeper/conf/zoo.cfg && \
 	mv /tmp/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml && \
 	rm $HADOOP_HOME/etc/hadoop/core-site.xml && \
