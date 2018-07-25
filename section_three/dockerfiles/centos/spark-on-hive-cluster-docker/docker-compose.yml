@@ -1,0 +1,143 @@
+version:  '2'
+services:
+
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.16.0.115
+    extra_hosts:
+      - "hive-master:172.16.0.110"
+      - "hive-slave1:172.16.0.111"
+      - "hive-slave2:172.16.0.112"
+      - "hive-slave3:172.16.0.113"
+      - "hive-slave4:172.16.0.114"
+    hostname: mysql
+    ports:
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: whg19961119
+
+  master:
+    image: solomonfield/spark-on-hive:2.3.1-centos
+    container_name: spark-master
+    networks:
+      default:
+        ipv4_address: 172.16.0.110
+    extra_hosts:
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-master
+    ports: 
+      - "19010:22"
+      - "50070:50070"
+      - "8088:8088"
+      - "16010:16010"
+      - "10020:10020"
+      - "19888:19888"
+      - "9000:9000"
+      - "8080:8080"
+    # volumes:
+    #   - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
+    environment:
+      ZK_ID: 1
+      ROLE: master
+    tty: true
+    stdin_open: true
+
+  slave1:
+    image: solomonfield/spark-on-hive:2.3.1-centos
+    container_name: spark-slave1
+    networks:
+      default:
+        ipv4_address: 172.16.0.111
+    extra_hosts:
+      - "spark-master:172.16.0.110"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave1
+    ports: 
+      - "19011:22"
+    environment:
+      ZK_ID: 2
+      ROLE: slave
+    tty: true
+    stdin_open: true
+
+  slave2:
+    image: solomonfield/spark-on-hive:2.3.1-centos
+    container_name: spark-slave2
+    networks:
+      default:
+        ipv4_address: 172.16.0.112
+    extra_hosts:
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave2
+    ports: 
+      - "19012:22"
+    environment:
+      ZK_ID: 3
+      ROLE: slave
+    tty: true
+    stdin_open: true
+
+  slave3:
+    image: solomonfield/spark-on-hive:2.3.1-centos
+    container_name: spark-slave3
+    networks:
+      default:
+        ipv4_address: 172.16.0.113
+    extra_hosts:
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave3
+    ports: 
+      - "19013:22"
+    environment:
+      ZK_ID: 4
+      ROLE: slave
+    tty: true
+    stdin_open: true
+
+  slave4:
+    image: solomonfield/spark-on-hive:2.3.1-centos
+    container_name: spark-slave4
+    networks:
+      default:
+        ipv4_address: 172.16.0.114
+    extra_hosts:
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+    hostname: spark-slave4
+    ports: 
+      - "19014:22"
+    environment:
+      ZK_ID: 5
+      ROLE: slave
+    tty: true
+    stdin_open: true
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.0.0/16
+        gateway: 172.16.0.249
+
