@@ -13,9 +13,9 @@ startMaster(){
 	schematool --dbType mysql --initSchema
 	# hiveserver2 --hiveconf hive.server2.enable.doAs=false
 	sleep 10
-	hive --service metastore
-	sleep 10
 	/usr/local/spark/sbin/start-all.sh
+	sleep 10
+	hive --service metastore
 }
 
 main(){
