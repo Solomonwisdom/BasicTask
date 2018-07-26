@@ -1,14 +1,15 @@
-FROM solomonfield/hive:2.3.3-centos
+FROM solomonfield/hive:2.3.3hb2-centos
 LABEL Solomonfield <whg19961229@gmail.com>
 
 COPY config/* /tmp/
+ENV SCALA_VERSION=2.11.8
 
 # Download first
-RUN wget https://downloads.lightbend.com/scala/2.12.6/scala-2.12.6.rpm && \
+RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm && \
     wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz
 
-RUN rpm -i scala-2.12.6.rpm && \
-    rm scala-2.12.6.rpm && \
+RUN rpm -i scala-${SCALA_VERSION}.rpm && \
+    rm scala-${SCALA_VERSION}.rpm && \
     tar xvf spark-2.3.1-bin-hadoop2.7.tgz && \
     mv spark-2.3.1-bin-hadoop2.7 /usr/local/spark && \
     rm -rf spark-2.3.1-bin-hadoop2.7.tgz && \
