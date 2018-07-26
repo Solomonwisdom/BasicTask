@@ -22,7 +22,7 @@ services:
       MYSQL_ROOT_PASSWORD: whg19961119
 
   master:
-    image: solomonfield/spark-on-hive:2.3.1-centos
+    image: solomonfield/spark-on-hive:2.3.1hb2-centos
     container_name: spark-master
     networks:
       default:
@@ -41,7 +41,7 @@ services:
       - "10020:10020"
       - "19888:19888"
       - "9000:9000"
-      - "8080:8080"
+      - "4040:4040"
     # volumes:
     #   - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
     environment:
@@ -51,7 +51,7 @@ services:
     stdin_open: true
 
   slave1:
-    image: solomonfield/spark-on-hive:2.3.1-centos
+    image: solomonfield/spark-on-hive:2.3.1hb2-centos
     container_name: spark-slave1
     networks:
       default:
@@ -71,7 +71,7 @@ services:
     stdin_open: true
 
   slave2:
-    image: solomonfield/spark-on-hive:2.3.1-centos
+    image: solomonfield/spark-on-hive:2.3.1hb2-centos
     container_name: spark-slave2
     networks:
       default:
@@ -91,7 +91,7 @@ services:
     stdin_open: true
 
   slave3:
-    image: solomonfield/spark-on-hive:2.3.1-centos
+    image: solomonfield/spark-on-hive:2.3.1hb2-centos
     container_name: spark-slave3
     networks:
       default:
@@ -111,7 +111,7 @@ services:
     stdin_open: true
 
   slave4:
-    image: solomonfield/spark-on-hive:2.3.1-centos
+    image: solomonfield/spark-on-hive:2.3.1hb2-centos
     container_name: spark-slave4
     networks:
       default:

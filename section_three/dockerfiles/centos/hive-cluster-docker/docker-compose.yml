@@ -24,7 +24,7 @@ services:
       # MYSQL_PASSWORD: hive
 
   master:
-    image: solomonfield/hive:2.3.3-centos
+    image: solomonfield/hive:2.3.3hb2-centos
     container_name: hive-master
     networks:
       default:
@@ -50,7 +50,7 @@ services:
     stdin_open: true
 
   slave1:
-    image: solomonfield/hive:2.3.3-centos
+    image: solomonfield/hive:2.3.3hb2-centos
     container_name: hive-slave1
     networks:
       default:
@@ -71,7 +71,7 @@ services:
     stdin_open: true
 
   slave2:
-    image: solomonfield/hive:2.3.3-centos
+    image: solomonfield/hive:2.3.3hb2-centos
     container_name: hive-slave2
     networks:
       default:
@@ -92,7 +92,7 @@ services:
     stdin_open: true
 
   slave3:
-    image: solomonfield/hive:2.3.3-centos
+    image: solomonfield/hive:2.3.3hb2-centos
     container_name: hive-slave3
     networks:
       default:
@@ -113,7 +113,7 @@ services:
     stdin_open: true
 
   slave4:
-    image: solomonfield/hive:2.3.3-centos
+    image: solomonfield/hive:2.3.3hb2-centos
     container_name: hive-slave4  
     networks:
       default:
