@@ -5,14 +5,14 @@ COPY config/* /tmp/
 
 # Download first
 RUN wget https://downloads.lightbend.com/scala/2.12.6/scala-2.12.6.rpm && \
-    wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz
-
-RUN rpm -i scala-2.12.6.rpm && \
+    wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz && \
+	rpm -i scala-2.12.6.rpm && \
     rm scala-2.12.6.rpm && \
     tar xvf spark-2.3.1-bin-hadoop2.7.tgz && \
     mv spark-2.3.1-bin-hadoop2.7 /usr/local/spark && \
-    rm -rf spark-2.3.1-bin-hadoop2.7.tgz && \
-	echo "spark-master" >> /usr/local/spark/conf/slaves && \
+    rm -rf spark-2.3.1-bin-hadoop2.7.tgz
+
+RUN	echo "spark-master" >> /usr/local/spark/conf/slaves && \
 	echo "spark-slave1" >> /usr/local/spark/conf/slaves && \
 	echo "spark-slave2" >> /usr/local/spark/conf/slaves && \
     echo "spark-slave3" >> /usr/local/spark/conf/slaves && \

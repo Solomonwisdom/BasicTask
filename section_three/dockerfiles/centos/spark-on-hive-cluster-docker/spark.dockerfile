@@ -6,14 +6,14 @@ ENV SCALA_VERSION=2.11.8
 
 # Download first
 RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm && \
-    wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz
-
-RUN rpm -i scala-${SCALA_VERSION}.rpm && \
+    wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz && \
+	rpm -i scala-${SCALA_VERSION}.rpm && \
     rm scala-${SCALA_VERSION}.rpm && \
-    tar xvf spark-2.3.1-bin-hadoop2.7.tgz && \
-    mv spark-2.3.1-bin-hadoop2.7 /usr/local/spark && \
-    rm -rf spark-2.3.1-bin-hadoop2.7.tgz && \
-	echo "spark-master" >> /usr/local/spark/conf/slaves && \
+	tar xvf spark-2.3.1-bin-hadoop2.7.tgz && \
+	mv spark-2.3.1-bin-hadoop2.7 /usr/local/spark && \
+	rm -rf spark-2.3.1-bin-hadoop2.7.tgz
+	
+RUN echo "spark-master" >> /usr/local/spark/conf/slaves && \
 	echo "spark-slave1" >> /usr/local/spark/conf/slaves && \
 	echo "spark-slave2" >> /usr/local/spark/conf/slaves && \
     echo "spark-slave3" >> /usr/local/spark/conf/slaves && \
