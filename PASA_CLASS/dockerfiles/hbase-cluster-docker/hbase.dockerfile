@@ -1,4 +1,4 @@
-FROM solomonfield/hadoop:2.7.6-centos
+FROM solomonfield/hadoop:2.7.4-centos
 LABEL Solomonfield <whg19961229@gmail.com>
 
 ENV HBASE_VERSION=2.1.0

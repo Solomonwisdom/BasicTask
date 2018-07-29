@@ -2,16 +2,16 @@ version:  '2'
 services:
 
   master:
-    image: solomonfield/spark:2.3.1-centos
+    image: solomonfield/spark-without-hive:2.1.2
     container_name: spark-master
     networks:
       default:
-        ipv4_address: 172.16.0.110
+        ipv4_address: 172.18.0.110
     extra_hosts:
-      - "spark-slave1:172.16.0.111"
-      - "spark-slave2:172.16.0.112"
-      - "spark-slave3:172.16.0.113"
-      - "spark-slave4:172.16.0.114"
+      - "spark-slave1:172.18.0.111"
+      - "spark-slave2:172.18.0.112"
+      - "spark-slave3:172.18.0.113"
+      - "spark-slave4:172.18.0.114"
     hostname: spark-master
     ports: 
       - "19010:22"
@@ -22,85 +22,91 @@ services:
       - "19888:19888"
       - "9000:9000"
       - "8080:8080"
+      - "4040:4040"
     volumes:
       - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
     environment:
+      ZK_ID: 1
       ROLE: master
     tty: true
     stdin_open: true
 
   slave1:
-    image: solomonfield/spark:2.3.1-centos
+    image: solomonfield/spark-without-hive:2.1.2
     container_name: spark-slave1
     networks:
       default:
-        ipv4_address: 172.16.0.111
+        ipv4_address: 172.18.0.111
     extra_hosts:
-      - "spark-master:172.16.0.110"
-      - "spark-slave2:172.16.0.112"
-      - "spark-slave3:172.16.0.113"
-      - "spark-slave4:172.16.0.114"
+      - "spark-master:172.18.0.110"
+      - "spark-slave2:172.18.0.112"
+      - "spark-slave3:172.18.0.113"
+      - "spark-slave4:172.18.0.114"
     hostname: spark-slave1
     ports: 
       - "19011:22"
     environment:
+      ZK_ID: 2
       ROLE: slave
     tty: true
     stdin_open: true
 
   slave2:
-    image: solomonfield/spark:2.3.1-centos
+    image: solomonfield/spark-without-hive:2.1.2
     container_name: spark-slave2
     networks:
       default:
-        ipv4_address: 172.16.0.112
+        ipv4_address: 172.18.0.112
     extra_hosts:
-      - "spark-master:172.16.0.110"
-      - "spark-slave1:172.16.0.111"
-      - "spark-slave3:172.16.0.113"
-      - "spark-slave4:172.16.0.114"
+      - "spark-master:172.18.0.110"
+      - "spark-slave1:172.18.0.111"
+      - "spark-slave3:172.18.0.113"
+      - "spark-slave4:172.18.0.114"
     hostname: spark-slave2
     ports: 
       - "19012:22"
     environment:
+      ZK_ID: 3
       ROLE: slave
     tty: true
     stdin_open: true
 
   slave3:
-    image: solomonfield/spark:2.3.1-centos
+    image: solomonfield/spark-without-hive:2.1.2
     container_name: spark-slave3
     networks:
       default:
-        ipv4_address: 172.16.0.113
+        ipv4_address: 172.18.0.113
     extra_hosts:
-      - "spark-master:172.16.0.110"
-      - "spark-slave1:172.16.0.111"
-      - "spark-slave2:172.16.0.112"
-      - "spark-slave4:172.16.0.114"
+      - "spark-master:172.18.0.110"
+      - "spark-slave1:172.18.0.111"
+      - "spark-slave2:172.18.0.112"
+      - "spark-slave4:172.18.0.114"
     hostname: spark-slave3
     ports: 
       - "19013:22"
     environment:
+      ZK_ID: 4
       ROLE: slave
     tty: true
     stdin_open: true
 
   slave4:
-    image: solomonfield/spark:2.3.1-centos
+    image: solomonfield/spark-without-hive:2.1.2
     container_name: spark-slave4
     networks:
       default:
-        ipv4_address: 172.16.0.114
+        ipv4_address: 172.18.0.114
     extra_hosts:
-      - "spark-master:172.16.0.110"
-      - "spark-slave1:172.16.0.111"
-      - "spark-slave2:172.16.0.112"
-      - "spark-slave3:172.16.0.113"
+      - "spark-master:172.18.0.110"
+      - "spark-slave1:172.18.0.111"
+      - "spark-slave2:172.18.0.112"
+      - "spark-slave3:172.18.0.113"
     hostname: spark-slave4
     ports: 
       - "19014:22"
     environment:
+      ZK_ID: 5
       ROLE: slave
     tty: true
     stdin_open: true
@@ -113,6 +119,6 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.16.0.0/16
-        gateway: 172.16.0.249
+      - subnet: 172.18.0.0/16
+        gateway: 172.18.0.249
 
