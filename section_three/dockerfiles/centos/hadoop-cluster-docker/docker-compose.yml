@@ -19,7 +19,7 @@ services:
       - "8088:8088"
       - "16010:16010"
     volumes:
-      - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
+      - ~/Public/repo/BasicTask/section_three/dockerfiles/share/experiment/:/root/experiment/
     environment:
       ROLE: master
     tty: true

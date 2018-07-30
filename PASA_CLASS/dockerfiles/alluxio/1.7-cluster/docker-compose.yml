@@ -6,12 +6,12 @@ services:
     container_name: hadoop-master
     networks:
       default:
-        ipv4_address: 172.18.0.110
+        ipv4_address: 172.16.0.110
     extra_hosts:
-      - "hadoop-slave1:172.18.0.111"
-      - "hadoop-slave2:172.18.0.112"
-      - "hadoop-slave3:172.18.0.113"
-      - "hadoop-slave4:172.18.0.114"
+      - "hadoop-slave1:172.16.0.111"
+      - "hadoop-slave2:172.16.0.112"
+      - "hadoop-slave3:172.16.0.113"
+      - "hadoop-slave4:172.16.0.114"
     hostname: hadoop-master
     ports: 
       - "19010:22"
@@ -20,7 +20,7 @@ services:
       - "16010:16010"
       - "19999:19999"
     volumes:
-      - ~/Public/repo/BasicTask/PASA_CLASS/dockerfiles/share/:/root/experiment/
+      - ~/Public/repo/BasicTask/PASA_CLASS/share/:/root/experiment/
     environment:
       ROLE: master
     tty: true
@@ -31,12 +31,12 @@ services:
     container_name: hadoop-slave1
     networks:
       default:
-        ipv4_address: 172.18.0.111
+        ipv4_address: 172.16.0.111
     extra_hosts:
-      - "hadoop-master:172.18.0.110"
-      - "hadoop-slave2:172.18.0.112"
-      - "hadoop-slave3:172.18.0.113"
-      - "hadoop-slave4:172.18.0.114"
+      - "hadoop-master:172.16.0.110"
+      - "hadoop-slave2:172.16.0.112"
+      - "hadoop-slave3:172.16.0.113"
+      - "hadoop-slave4:172.16.0.114"
     hostname: hadoop-slave1
     ports: 
       - "19011:22"
@@ -50,12 +50,12 @@ services:
     container_name: hadoop-slave2
     networks:
       default:
-        ipv4_address: 172.18.0.112
+        ipv4_address: 172.16.0.112
     extra_hosts:
-      - "hadoop-master:172.18.0.110"
-      - "hadoop-slave1:172.18.0.111"
-      - "hadoop-slave3:172.18.0.113"
-      - "hadoop-slave4:172.18.0.114"
+      - "hadoop-master:172.16.0.110"
+      - "hadoop-slave1:172.16.0.111"
+      - "hadoop-slave3:172.16.0.113"
+      - "hadoop-slave4:172.16.0.114"
     hostname: hadoop-slave2
     ports: 
       - "19012:22"
@@ -69,12 +69,12 @@ services:
     container_name: hadoop-slave3
     networks:
       default:
-        ipv4_address: 172.18.0.113
+        ipv4_address: 172.16.0.113
     extra_hosts:
-      - "hadoop-master:172.18.0.110"
-      - "hadoop-slave1:172.18.0.111"
-      - "hadoop-slave2:172.18.0.112"
-      - "hadoop-slave4:172.18.0.114"
+      - "hadoop-master:172.16.0.110"
+      - "hadoop-slave1:172.16.0.111"
+      - "hadoop-slave2:172.16.0.112"
+      - "hadoop-slave4:172.16.0.114"
     hostname: hadoop-slave3
     ports: 
       - "19013:22"
@@ -88,12 +88,12 @@ services:
     container_name: hadoop-slave4
     networks:
       default:
-        ipv4_address: 172.18.0.114
+        ipv4_address: 172.16.0.114
     extra_hosts:
-      - "hadoop-master:172.18.0.110"
-      - "hadoop-slave1:172.18.0.111"
-      - "hadoop-slave2:172.18.0.112"
-      - "hadoop-slave3:172.18.0.113"
+      - "hadoop-master:172.16.0.110"
+      - "hadoop-slave1:172.16.0.111"
+      - "hadoop-slave2:172.16.0.112"
+      - "hadoop-slave3:172.16.0.113"
     hostname: hadoop-slave4
     ports: 
       - "19014:22"
@@ -110,6 +110,6 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.18.0.0/16
-        gateway: 172.18.0.249
+      - subnet: 172.16.0.0/16
+        gateway: 172.16.0.249
 

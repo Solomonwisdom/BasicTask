@@ -22,7 +22,7 @@ services:
       MYSQL_ROOT_PASSWORD: whg19961119
 
   master:
-    image: solomonfield/spark-on-hive:2.3.1hb2-centos
+    image: solomonfield/spark-on-hive:2.3.1-centos
     container_name: spark-master
     networks:
       default:
@@ -42,8 +42,9 @@ services:
       - "19888:19888"
       - "9000:9000"
       - "4040:4040"
-    # volumes:
-    #   - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
+    volumes:
+      - ~/Public/repo/BasicTask/section_three/dockerfiles/share/experiment:/root/experiment/
+      - ~/Public/repo/BasicTask/section_three/dockerfiles/share/assignment:/root/assignment/
     environment:
       ZK_ID: 1
       ROLE: master
@@ -51,7 +52,7 @@ services:
     stdin_open: true
 
   slave1:
-    image: solomonfield/spark-on-hive:2.3.1hb2-centos
+    image: solomonfield/spark-on-hive:2.3.1-centos
     container_name: spark-slave1
     networks:
       default:
@@ -71,7 +72,7 @@ services:
     stdin_open: true
 
   slave2:
-    image: solomonfield/spark-on-hive:2.3.1hb2-centos
+    image: solomonfield/spark-on-hive:2.3.1-centos
     container_name: spark-slave2
     networks:
       default:
@@ -91,7 +92,7 @@ services:
     stdin_open: true
 
   slave3:
-    image: solomonfield/spark-on-hive:2.3.1hb2-centos
+    image: solomonfield/spark-on-hive:2.3.1-centos
     container_name: spark-slave3
     networks:
       default:
@@ -111,7 +112,7 @@ services:
     stdin_open: true
 
   slave4:
-    image: solomonfield/spark-on-hive:2.3.1hb2-centos
+    image: solomonfield/spark-on-hive:2.3.1-centos
     container_name: spark-slave4
     networks:
       default:

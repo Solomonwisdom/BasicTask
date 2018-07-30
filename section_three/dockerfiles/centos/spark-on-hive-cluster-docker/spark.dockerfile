@@ -1,4 +1,4 @@
-FROM solomonfield/hive:2.3.3hb2-centos
+FROM solomonfield/hive:2.3.3-centos
 LABEL Solomonfield <whg19961229@gmail.com>
 
 COPY config/* /tmp/

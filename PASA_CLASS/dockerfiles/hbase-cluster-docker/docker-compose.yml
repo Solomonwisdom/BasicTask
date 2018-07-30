@@ -6,12 +6,12 @@ services:
     container_name: hbase-master
     networks:
       default:
-        ipv4_address: 172.18.0.110
+        ipv4_address: 172.16.0.110
     extra_hosts:
-      - "hbase-slave1:172.18.0.111"
-      - "hbase-slave2:172.18.0.112"
-      - "hbase-slave3:172.18.0.113"
-      - "hbase-slave4:172.18.0.114"
+      - "hbase-slave1:172.16.0.111"
+      - "hbase-slave2:172.16.0.112"
+      - "hbase-slave3:172.16.0.113"
+      - "hbase-slave4:172.16.0.114"
     hostname: hbase-master
     ports: 
       - "19010:22"
@@ -19,7 +19,7 @@ services:
       - "8088:8088"
       - "16010:16010"
     volumes:
-      - ~/Public/repo/BasicTask/PASA_CLASS/dockerfiles/share/:/root/experiment/
+      - ~/Public/repo/BasicTask/PASA_CLASS/share/:/root/experiment/
     environment:
       ZK_ID: 1
       ROLE: master
@@ -31,12 +31,12 @@ services:
     container_name: hbase-slave1
     networks:
       default:
-        ipv4_address: 172.18.0.111
+        ipv4_address: 172.16.0.111
     extra_hosts:
-      - "hbase-master:172.18.0.110"
-      - "hbase-slave2:172.18.0.112"
-      - "hbase-slave3:172.18.0.113"
-      - "hbase-slave4:172.18.0.114"
+      - "hbase-master:172.16.0.110"
+      - "hbase-slave2:172.16.0.112"
+      - "hbase-slave3:172.16.0.113"
+      - "hbase-slave4:172.16.0.114"
     hostname: hbase-slave1
     ports: 
       - "19011:22"
@@ -51,12 +51,12 @@ services:
     container_name: hbase-slave2
     networks:
       default:
-        ipv4_address: 172.18.0.112
+        ipv4_address: 172.16.0.112
     extra_hosts:
-      - "hbase-master:172.18.0.110"
-      - "hbase-slave1:172.18.0.111"
-      - "hbase-slave3:172.18.0.113"
-      - "hbase-slave4:172.18.0.114"
+      - "hbase-master:172.16.0.110"
+      - "hbase-slave1:172.16.0.111"
+      - "hbase-slave3:172.16.0.113"
+      - "hbase-slave4:172.16.0.114"
     hostname: hbase-slave2
     ports: 
       - "19012:22"
@@ -71,12 +71,12 @@ services:
     container_name: hbase-slave3
     networks:
       default:
-        ipv4_address: 172.18.0.113
+        ipv4_address: 172.16.0.113
     extra_hosts:
-      - "hbase-master:172.18.0.110"
-      - "hbase-slave1:172.18.0.111"
-      - "hbase-slave2:172.18.0.112"
-      - "hbase-slave4:172.18.0.114"
+      - "hbase-master:172.16.0.110"
+      - "hbase-slave1:172.16.0.111"
+      - "hbase-slave2:172.16.0.112"
+      - "hbase-slave4:172.16.0.114"
     hostname: hbase-slave3
     ports: 
       - "19013:22"
@@ -91,12 +91,12 @@ services:
     container_name: hbase-slave4  
     networks:
       default:
-        ipv4_address: 172.18.0.114
+        ipv4_address: 172.16.0.114
     extra_hosts:
-      - "hbase-master:172.18.0.110"
-      - "hbase-slave1:172.18.0.111"
-      - "hbase-slave2:172.18.0.112"
-      - "hbase-slave3:172.18.0.113"
+      - "hbase-master:172.16.0.110"
+      - "hbase-slave1:172.16.0.111"
+      - "hbase-slave2:172.16.0.112"
+      - "hbase-slave3:172.16.0.113"
     hostname: hbase-slave4
     ports: 
       - "19014:22"
@@ -114,6 +114,6 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.18.0.0/16
-        gateway: 172.18.0.249
+      - subnet: 172.16.0.0/16
+        gateway: 172.16.0.249
 

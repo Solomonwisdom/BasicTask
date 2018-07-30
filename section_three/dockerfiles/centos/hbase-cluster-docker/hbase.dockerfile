@@ -1,7 +1,7 @@
 FROM solomonfield/hadoop:2.7.6-centos
 LABEL Solomonfield <whg19961229@gmail.com>
 
-ENV HBASE_VERSION=2.1.0
+ENV HBASE_VERSION=1.2.6.1
 COPY config/* /tmp/
 # ADD ZOOKEEPER AND HBASE
 RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz && \

@@ -19,6 +19,8 @@ public class ExperimentDriver {
             pgd.addClass("invertedindexwithhbase", InvertedIndexWithHbase.class, "A map/reduce program that implements inverted index");
             pgd.addClass("Wuxiascan", WuxiaScan.class, "Scan the table Wuxia and save all in a file");
             pgd.addClass("hbasetest", HBaseTest.class, "A Test");
+            pgd.addClass("hbaseassignment", HBaseAssignment.class, "HBase Assignment");
+            pgd.addClass("alluxioassignment", AlluxioAssignment.class, "Alluxio Assignment");
             exitCode = pgd.run(args);
         } catch (Throwable throwable) {
             throwable.printStackTrace();

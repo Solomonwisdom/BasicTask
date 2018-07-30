@@ -1,4 +1,4 @@
-FROM solomonfield/hbase:2.1.0-centos
+FROM solomonfield/hbase:1.2.6.1-centos
 LABEL Solomonfield <whg19961229@gmail.com>
 
 ENV HIVE_VERSION=2.3.3
