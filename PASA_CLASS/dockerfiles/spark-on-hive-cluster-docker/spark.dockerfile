@@ -1,17 +1,17 @@
-FROM solomonfield/spark-on-hive:2.3.1-centos
+FROM solomonfield/hive:2.0.0
 LABEL Solomonfield <whg19961229@gmail.com>
 
 ENV SCALA_VERSION=2.11.8
-
+ENV SPARK_VERSION=2.1.2
 # Download first
 RUN wget https://downloads.lightbend.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.rpm && \
-    wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz && \
+    wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz && \
 	rpm -i scala-${SCALA_VERSION}.rpm && \
     rm scala-${SCALA_VERSION}.rpm && \
-	tar xvf spark-2.3.1-bin-hadoop2.7.tgz && \
-	mv spark-2.3.1-bin-hadoop2.7 /usr/local/spark && \
-	rm -rf spark-2.3.1-bin-hadoop2.7.tgz
-
+	tar xvf spark-${SPARK_VERSION}-bin-hadoop2.7.tgz && \
+	mv spark-${SPARK_VERSION}-bin-hadoop2.7 /usr/local/spark && \
+	rm -rf spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
+	
 COPY config/* /tmp/
 
 RUN echo "spark-master" >> /usr/local/spark/conf/slaves && \
@@ -52,6 +52,5 @@ RUN echo "spark-master" >> /usr/local/spark/conf/slaves && \
 ENV SPARK_HOME /usr/local/spark
 ENV PATH $PATH:$SPARK_HOME/bin
 ENV HIVE_SKIP_SPARK_ASSEMBLY=true
-
 EXPOSE 8080
 ENTRYPOINT [ "sh", "-c", "/root/spark-entrypoint.sh; bash"]

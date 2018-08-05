@@ -23,11 +23,11 @@
 	</property>
 	<property>
 		<name>dfs.namenode.secondary.http-address</name>
-		<value>hive-slave1:50090</value>
+		<value>spark-slave1:50090</value>
 	</property>
 	<property>
 		<name>dfs.namenode.http-address</name>
-		<value>hive-master:50070</value>
+		<value>spark-master:50070</value>
 	</property>
 	<property>
 		<name>dfs.datanode.max.transfer.threads</name>

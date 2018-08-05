@@ -50,7 +50,7 @@ services:
       ZK_ID: 1
       ROLE: master
     volumes:
-      - ~/Public/repo/BasicTask/section_three/dockerfiles/share/:/root/experiment/
+      - ~/Public/repo/BasicTask/PASA_CLASS/share:/root/experiment/
     tty: true
     stdin_open: true
 

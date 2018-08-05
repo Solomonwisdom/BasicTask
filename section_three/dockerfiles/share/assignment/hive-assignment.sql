@@ -8,6 +8,6 @@ CREATE TABLE CSVTable(id STRING, age INT, sex STRING,
     "skip.header.line.count"="1"
     );
 # load data
-LOAD DATA LOCAL INPATH '/root/experiment/assignment/bank-data.csv' INTO TABLE CSVTable;
+LOAD DATA LOCAL INPATH '/root/experiment/bank-data.csv' INTO TABLE CSVTable;
 # query
-SELECT region,AVG(income) FROM CSVTable WHERE age>30 GROUP BY region;
+SELECT region,AVG(income) FROM CSVTable WHERE age>30 AND sex=='MALE' GROUP BY region;

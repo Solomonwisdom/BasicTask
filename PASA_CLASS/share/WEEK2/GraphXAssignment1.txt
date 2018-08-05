@@ -1,0 +1,25 @@
+中国境内的PageRank值最高的10个机场
+(3364,Beijing Capital International Airport,China,12.825175762146916)
+(3406,Shanghai Pudong International Airport,China,9.783334087423029)
+(3370,Guangzhou Baiyun International Airport,China,9.435698135750785)
+(3395,Chengdu Shuangliu International Airport,China,6.914708844536478)
+(3382,Kunming Changshui International Airport,China,6.4863850451824066)
+(3393,Chongqing Jiangbei International Airport,China,5.397288762801593)
+(3379,Xi'an Xianyang International Airport,China,5.270342962397726)
+(3374,Shenzhen Bao'an International Airport,China,5.0795365016922664)
+(3386,Hangzhou Xiaoshan International Airport,China,4.239229302175907)
+(3399,Ürümqi Diwopu International Airport,China,4.216254004794491)
+美国境内的PageRank值最高的10个机场
+(3682,Hartsfield Jackson Atlanta International Airport,United States,15.769290929860565)
+(3830,Chicago O'Hare International Airport,United States,14.460067020720224)
+(3751,Denver International Airport,United States,14.372258981257835)
+(3670,Dallas Fort Worth International Airport,United States,14.119029922211206)
+(3550,George Bush Intercontinental Houston Airport,United States,11.882678550450404)
+(3484,Los Angeles International Airport,United States,11.23611867044206)
+(3797,John F Kennedy International Airport,United States,10.181509392681917)
+(3858,Minneapolis-St Paul International/Wold-Chamberlain Airport,United States,9.73705153122574)
+(3876,Charlotte Douglas International Airport,United States,9.4690780790951)
+(3576,Miami International Airport,United States,9.34438127540356)
+南京禄口机场的排名：
+国内：20
+国际：215

@@ -10,15 +10,21 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>spark-master</value>
+        <value>hadoop-master</value>
     </property>
-    <!-- 防止内存不足检测停止任务 -->
+
     <property>
-        <name>yarn.nodemanager.pmem-check-enabled</name>
-        <value>false</value>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>1024</value>
+    </property>
+
+    <!-- Max RAM-per-container -->
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name> 
+        <value>2560</value>
     </property>
     <property>
-        <name>yarn.nodemanager.vmem-check-enabled</name>
-        <value>false</value>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>3072</value>
     </property>
 </configuration>

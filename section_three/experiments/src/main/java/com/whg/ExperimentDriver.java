@@ -3,7 +3,7 @@ package com.whg;
 import org.apache.hadoop.util.ProgramDriver;
 
 /**
- * InvertedIndex class
+ * Experiment class
  *
  * @author wanghaogang
  * @date 2018/7/10
@@ -20,7 +20,6 @@ public class ExperimentDriver {
             pgd.addClass("Wuxiascan", WuxiaScan.class, "Scan the table Wuxia and save all in a file");
             pgd.addClass("hbasetest", HBaseTest.class, "A Test");
             pgd.addClass("hbaseassignment", HBaseAssignment.class, "HBase Assignment");
-            pgd.addClass("alluxioassignment", AlluxioAssignment.class, "Alluxio Assignment");
             exitCode = pgd.run(args);
         } catch (Throwable throwable) {
             throwable.printStackTrace();

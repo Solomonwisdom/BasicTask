@@ -12,6 +12,7 @@
         <name>yarn.resourcemanager.hostname</name>
         <value>spark-master</value>
     </property>
+
     <!-- 防止内存不足检测停止任务 -->
     <property>
         <name>yarn.nodemanager.pmem-check-enabled</name>

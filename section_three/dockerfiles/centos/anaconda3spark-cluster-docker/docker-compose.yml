@@ -20,120 +20,126 @@ services:
       - "3306:3306"
     environment: 
       MYSQL_ROOT_PASSWORD: whg19961119
-      # MYSQL_USER: hive
-      # MYSQL_PASSWORD: hive
 
   master:
-    image: solomonfield/hive:2.0.0
-    container_name: hive-master
+    image: solomonfield/anaconda3spark:2.3.1
+    container_name: spark-master
     networks:
       default:
         ipv4_address: 172.16.0.110
     extra_hosts:
-      - "hive-slave1:172.16.0.111"
-      - "hive-slave2:172.16.0.112"
-      - "hive-slave3:172.16.0.113"
-      - "hive-slave4:172.16.0.114"
-      - "mysql:172.16.0.115"
-    hostname: hive-master
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-master
     ports: 
       - "19010:22"
       - "50070:50070"
       - "8088:8088"
       - "16010:16010"
-    environment:
-      ZK_ID: 1
-      ROLE: master
+      - "10020:10020"
+      - "19888:19888"
+      - "9000:9000"
+      - "4040:4040"
     volumes:
       - ~/Public/repo/BasicTask/section_three/dockerfiles/share/experiment:/root/experiment/
       - ~/Public/repo/BasicTask/section_three/dockerfiles/share/assignment:/root/assignment/
+    environment:
+      ZK_ID: 1
+      ROLE: master
+      PYSPARK_PYTHON: python3 
+      PYSPARK_DRIVER_PYTHON: ipython 
     tty: true
     stdin_open: true
 
   slave1:
-    image: solomonfield/hive:2.0.0
-    container_name: hive-slave1
+    image: solomonfield/anaconda3spark:2.3.1
+    container_name: spark-slave1
     networks:
       default:
         ipv4_address: 172.16.0.111
     extra_hosts:
-      - "hive-master:172.16.0.110"
-      - "hive-slave2:172.16.0.112"
-      - "hive-slave3:172.16.0.113"
-      - "hive-slave4:172.16.0.114"
-      - "mysql:172.16.0.115"
-    hostname: hive-slave1
+      - "spark-master:172.16.0.110"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave1
     ports: 
       - "19011:22"
     environment:
       ZK_ID: 2
       ROLE: slave
+      PYSPARK_PYTHON: python3 
+      PYSPARK_DRIVER_PYTHON: ipython 
     tty: true
     stdin_open: true
 
   slave2:
-    image: solomonfield/hive:2.0.0
-    container_name: hive-slave2
+    image: solomonfield/anaconda3spark:2.3.1
+    container_name: spark-slave2
     networks:
       default:
         ipv4_address: 172.16.0.112
     extra_hosts:
-      - "hive-master:172.16.0.110"
-      - "hive-slave1:172.16.0.111"
-      - "hive-slave3:172.16.0.113"
-      - "hive-slave4:172.16.0.114"
-      - "mysql:172.16.0.115"
-    hostname: hive-slave2
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave2
     ports: 
       - "19012:22"
     environment:
       ZK_ID: 3
       ROLE: slave
+      PYSPARK_PYTHON: python3 
+      PYSPARK_DRIVER_PYTHON: ipython 
     tty: true
     stdin_open: true
 
   slave3:
-    image: solomonfield/hive:2.0.0
-    container_name: hive-slave3
+    image: solomonfield/anaconda3spark:2.3.1
+    container_name: spark-slave3
     networks:
       default:
         ipv4_address: 172.16.0.113
     extra_hosts:
-      - "hive-master:172.16.0.110"
-      - "hive-slave1:172.16.0.111"
-      - "hive-slave2:172.16.0.112"
-      - "hive-slave4:172.16.0.114"
-      - "mysql:172.16.0.115"
-    hostname: hive-slave3
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave4:172.16.0.114"
+    hostname: spark-slave3
     ports: 
       - "19013:22"
     environment:
       ZK_ID: 4
       ROLE: slave
+      PYSPARK_PYTHON: python3 
+      PYSPARK_DRIVER_PYTHON: ipython 
     tty: true
     stdin_open: true
 
   slave4:
-    image: solomonfield/hive:2.0.0
-    container_name: hive-slave4  
+    image: solomonfield/anaconda3spark:2.3.1
+    container_name: spark-slave4
     networks:
       default:
         ipv4_address: 172.16.0.114
     extra_hosts:
-      - "hive-master:172.16.0.110"
-      - "hive-slave1:172.16.0.111"
-      - "hive-slave2:172.16.0.112"
-      - "hive-slave3:172.16.0.113"
-      - "mysql:172.16.0.115"
-    hostname: hive-slave4
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+    hostname: spark-slave4
     ports: 
       - "19014:22"
     environment:
       ZK_ID: 5
       ROLE: slave
+      PYSPARK_PYTHON: python3 
+      PYSPARK_DRIVER_PYTHON: ipython 
     tty: true
     stdin_open: true
-
 
 networks:
   default:
