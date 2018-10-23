@@ -10,11 +10,11 @@ services:
       default:
         ipv4_address: 172.16.0.115
     extra_hosts:
-      - "hive-master:172.16.0.110"
-      - "hive-slave1:172.16.0.111"
-      - "hive-slave2:172.16.0.112"
-      - "hive-slave3:172.16.0.113"
-      - "hive-slave4:172.16.0.114"
+      - "spark-master:172.16.0.110"
+      - "spark-slave1:172.16.0.111"
+      - "spark-slave2:172.16.0.112"
+      - "spark-slave3:172.16.0.113"
+      - "spark-slave4:172.16.0.114"
     hostname: mysql
     ports:
       - "3306:3306"
