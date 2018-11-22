@@ -1,4 +1,4 @@
-package com.whg.triangle;
+package com.whg.triangle_old;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
