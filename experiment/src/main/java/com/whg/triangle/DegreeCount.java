@@ -32,6 +32,7 @@ public class DegreeCount {
             }
             newKey.set(a);
             newValue.set(b);
+            // 统计一个点所有的邻接点
             context.write(newKey, newValue);
             context.write(newValue, newKey);
         }
@@ -45,6 +46,7 @@ public class DegreeCount {
         @Override
         public void reduce(Text key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
+            // 去重后得到点度
             Set<String> set = new HashSet<>();
             for (Text val: values) {
                 set.add(val.toString());
@@ -59,6 +61,7 @@ public class DegreeCount {
         @Override
         public void map(Text key, IntWritable value, Context context)
                 throws IOException, InterruptedException {
+            // 仅仅将key和value交换，依赖mapreduce完成按照点度升序r排序
             context.write(value, key);
         }
     }

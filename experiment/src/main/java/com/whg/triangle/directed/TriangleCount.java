@@ -54,7 +54,16 @@ public class TriangleCount extends Configured implements Tool {
         conf.set("mapreduce.input.fileinputformat.split.maxsize", "12582912");
         conf.set("yarn.scheduler.minimum-allocation-mb", "1024");
         conf.set("yarn.scheduler.maximum-allocation-mb", "4096");
-        conf.set("args0", "/user/2018st21/tmp/graph/part-r-00000");
+        String graphPath0 = "/user/2018st21/tmp/graph/part-r-00000";
+        StringBuilder graphPahts = new StringBuilder();
+        for (int i=0; i < reducerNum; ++i) {
+            String id = ""+i;
+            if (i != 0) {
+                graphPahts.append(",");
+            }
+            graphPahts.append(graphPath0.substring(0, graphPath0.length()-id.length())+id);
+        }
+        conf.set("edges", graphPahts.toString());
         FileSystem fs = FileSystem.get(conf);
         fs.delete(new Path("/user/2018st21/tmp"), true);
         fs.delete(new Path(args[1]), true);
@@ -74,7 +83,7 @@ public class TriangleCount extends Configured implements Tool {
 
         job0.setInputFormatClass(TextInputFormat.class);
         job0.setOutputFormatClass(TextOutputFormat.class);
-        job0.setNumReduceTasks(1);
+        job0.setNumReduceTasks(reducerNum);
 
         // 设置输入和输出目录
         FileInputFormat.addInputPath(job0, new Path(args[0]));
@@ -152,6 +161,7 @@ public class TriangleCount extends Configured implements Tool {
         job3.setOutputKeyClass(Text.class);
         job3.setOutputValueClass(IntWritable.class);
 
+        reducerNum = 20;
         job3.setNumReduceTasks(reducerNum);
 
 //        job3.setInputFormatClass(KeyValueTextInputFormat.class);
@@ -186,6 +196,7 @@ public class TriangleCount extends Configured implements Tool {
         }
         FSDataOutputStream fsDataOutputStream = fs.create(new Path(args[1]+Path.SEPARATOR+"part-r-00000"));
         fsDataOutputStream.writeChars("The number of Triangle:\t"+ans);
+        fsDataOutputStream.close();
         /*
         //设置一个job
         Job job4 = Job.getInstance(conf, "Sum");

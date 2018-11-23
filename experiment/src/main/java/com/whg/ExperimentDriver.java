@@ -16,8 +16,8 @@ public class ExperimentDriver {
         ProgramDriver pgd = new ProgramDriver();
         try {
             pgd.addClass("Triangle_Count", com.whg.triangle.undirected.TriangleCount.class, "Triangle Count");
-//            pgd.addClass("Directed_Triangle_Count", TriangleCount.class, "Directed Triangle Count");
-            pgd.addClass("Directed_Triangle_Count", com.whg.triangle_old.TriangleCount.class, "Directed Triangle Count");
+            pgd.addClass("Directed_Triangle_Count", com.whg.triangle.directed.TriangleCount.class, "Directed Triangle Count");
+            pgd.addClass("Directed_Triangle_Count_old", com.whg.triangle_old.DirectedTriangleCount.class, "Directed Triangle Count");
             exitCode = pgd.run(args);
         } catch (Throwable throwable) {
             throwable.printStackTrace();

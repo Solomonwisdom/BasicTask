@@ -54,7 +54,6 @@ public class TriangleCount extends Configured implements Tool {
         conf.set("mapreduce.input.fileinputformat.split.maxsize", "5242880");
         conf.set("yarn.scheduler.minimum-allocation-mb", "1024");
         conf.set("yarn.scheduler.maximum-allocation-mb", "4096");
-//        conf.set("yarn.scheduler.minimum-allocation-mb", "2048");
         FileSystem fs = FileSystem.get(conf);
         fs.delete(new Path("tmp"), true);
         fs.delete(new Path(args[1]), true);

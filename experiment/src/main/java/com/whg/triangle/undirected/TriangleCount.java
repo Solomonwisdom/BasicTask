@@ -53,7 +53,7 @@ public class TriangleCount extends Configured implements Tool {
         conf.set("mapreduce.input.fileinputformat.split.maxsize", "12582912");
         conf.set("yarn.scheduler.minimum-allocation-mb", "1024");
         conf.set("yarn.scheduler.maximum-allocation-mb", "4096");
-        conf.set("args0", args[0]);
+        conf.set("edges", args[0]);
         FileSystem fs = FileSystem.get(conf);
         fs.delete(new Path("/user/2018st21/tmp"), true);
         fs.delete(new Path(args[1]), true);
@@ -126,7 +126,8 @@ public class TriangleCount extends Configured implements Tool {
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(IntWritable.class);
 
-        job2.setNumReduceTasks(reducerNum);
+        reducerNum = 20;
+        job2.setNumReduceTasks(reducerNum); // 20最快
 
 //        job2.setInputFormatClass(KeyValueTextInputFormat.class);
 //        job2.setOutputFormatClass(TextOutputFormat.class);
@@ -160,6 +161,7 @@ public class TriangleCount extends Configured implements Tool {
         }
         FSDataOutputStream fsDataOutputStream = fs.create(new Path(args[1]+Path.SEPARATOR+"part-r-00000"));
         fsDataOutputStream.writeChars("The number of Triangle:\t"+ans);
+        fsDataOutputStream.close();
         /*
         //设置一个job
         Job job3 = Job.getInstance(conf, "Sum");

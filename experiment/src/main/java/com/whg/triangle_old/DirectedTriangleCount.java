@@ -50,11 +50,11 @@ public class DirectedTriangleCount extends Configured implements Tool {
         }
         Configuration conf = this.getConf();
         conf.set("mapreduce.input.fileinputformat.split.minsize", "2621440");
-        conf.set("mapreduce.input.fileinputformat.split.maxsize", "5242880");
+        conf.set("mapreduce.input.fileinputformat.split.maxsize", "12582912");
         conf.set("yarn.scheduler.minimum-allocation-mb", "1024");
         conf.set("yarn.scheduler.maximum-allocation-mb", "4096");
         FileSystem fs = FileSystem.get(conf);
-        fs.delete(new Path("tmp"), true);
+        fs.delete(new Path("/user/2018st21/tmp"), true);
         fs.delete(new Path(args[1]), true);
         Job job0 = Job.getInstance(conf, "Build the Directed Graph");
         job0.setJarByClass(DirectedTriangleCount.class);
@@ -79,7 +79,7 @@ public class DirectedTriangleCount extends Configured implements Tool {
         // 设置输入和输出目录
         FileInputFormat.addInputPath(job0, new Path(args[0]));
         FileInputFormat.setMinInputSplitSize(job0,10);
-        FileOutputFormat.setOutputPath(job0, new Path("tmp/graph"));
+        FileOutputFormat.setOutputPath(job0, new Path("/user/2018st21/tmp/graph"));
 
         if (!job0.waitForCompletion(true)) {
             System.exit(1);
@@ -109,8 +109,8 @@ public class DirectedTriangleCount extends Configured implements Tool {
         SequenceFileOutputFormat.setOutputCompressionType(job0, SequenceFile.CompressionType.BLOCK);
         SequenceFileOutputFormat.setOutputCompressorClass(job0, DefaultCodec.class);
         // 设置job1输入和输出目录
-        FileInputFormat.addInputPath(job1, new Path("tmp/graph"));
-        FileOutputFormat.setOutputPath(job1, new Path("tmp/count"));
+        FileInputFormat.addInputPath(job1, new Path("/user/2018st21/tmp/graph"));
+        FileOutputFormat.setOutputPath(job1, new Path("/user/2018st21/tmp/count"));
 
         if (!job1.waitForCompletion(job0.isComplete())) {
             System.exit(1);
@@ -135,6 +135,7 @@ public class DirectedTriangleCount extends Configured implements Tool {
         }
         FSDataOutputStream fsDataOutputStream = fs.create(new Path(args[1]+Path.SEPARATOR+"part-r-00000"));
         fsDataOutputStream.writeChars("The number of Triangle:\t"+ans);
+        fsDataOutputStream.close();
         /*
         //设置一个job
         Job job2 = Job.getInstance(conf, "Sum");
@@ -163,7 +164,7 @@ public class DirectedTriangleCount extends Configured implements Tool {
             System.exit(1);
         }
         */
-        fs.delete(new Path("tmp"), true);
+//        fs.delete(new Path("tmp"), true);
         return 0;
     }
 

@@ -27,6 +27,7 @@ public class GraphBuilder {
             String a = itr.nextToken();
             String b = itr.nextToken();
             int cmp = a.compareTo(b);
+            // 字典序小的做key，字典序大的做value，是入边加"+"，是出边加"-"
             if (cmp == 0) {
                 return;
             } else if(cmp > 0) {
@@ -49,6 +50,7 @@ public class GraphBuilder {
                 throws IOException, InterruptedException {
             Set<String> inSet = new TreeSet<>();
             Set<String> outSet = new HashSet<>();
+            // 将"+"开头的和"-"开头的分别放入两个集合。
             for (Text val: values) {
                 if (val.toString().startsWith("+")) {
                     outSet.add(val.toString().substring(1));
@@ -56,6 +58,7 @@ public class GraphBuilder {
                     inSet.add(val.toString().substring(1));
                 }
             }
+            // 求两个集合的交集
             for (String vertex: inSet) {
                 if (outSet.contains(vertex)) {
                     newValue.set(vertex);
